@@ -92,7 +92,7 @@ export default {
     dateColor(date) {
       //Date of the overdue project is highlighted by red color
       let color = ''
-      if (moment(date).format('LLL') < moment().format('LLL')) {
+      if (moment(date).format() < moment().format()) {
         color = 'red'
       }
       return color
