@@ -10,7 +10,12 @@
           hide-details
         ></v-text-field>
         <v-spacer></v-spacer>
-        <v-btn small color="success" :to="{ name: 'project-create' }">
+        <v-btn
+          small
+          color="success"
+          :to="{ name: 'project-create' }"
+          class="mt-2"
+        >
           <v-icon class="mr-2">mdi-plus-circle-outline</v-icon> New
           Project</v-btn
         >

@@ -49,16 +49,16 @@
           small
           :disabled="!valid"
           color="success"
-          class="mr-4"
+          class="mr-4 mt-2"
           @click="edit"
         >
-          Edit project
+          Confirm changes
         </v-btn>
         <v-btn
           small
           :disabled="!valid"
           color="error"
-          class="mr-4"
+          class="mr-4 mt-2"
           @click="dialog = true"
         >
           Delete project

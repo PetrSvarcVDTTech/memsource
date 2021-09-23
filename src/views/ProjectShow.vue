@@ -1,6 +1,6 @@
 <template>
   <div>
-    <TitleDateTime :title="'Project ' + id" />
+    <TitleDateTime :title="'Edit project ' + id" />
     <EditForm :id="id" />
   </div>
 </template>

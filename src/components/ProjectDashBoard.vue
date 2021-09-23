@@ -37,7 +37,7 @@
       </v-col>
       <v-col cols="12" sm="6" md="4">
         <v-card color="warning" dark min-height="150" class="pa-4">
-          <v-card-title>Most prominent source(s)</v-card-title>
+          <v-card-title>Prominent source(s)</v-card-title>
           <v-card-text>
             <div
               v-for="lang in mostProminentLang"

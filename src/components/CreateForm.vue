@@ -100,13 +100,13 @@
         small
         :disabled="!valid"
         color="success"
-        class="mr-4"
+        class="mr-4 mt-2"
         @click="create"
       >
         Create
       </v-btn>
 
-      <v-btn small color="error" class="mr-4" @click="reset">Clear</v-btn>
+      <v-btn small color="error" class="mr-4 mt-2" @click="reset">Clear</v-btn>
     </v-form>
   </v-card>
 </template>
