@@ -1,40 +1,14 @@
 <template>
   <div>
     <TitleDateTime title="Projects" />
-    <v-sheet
-      v-if="!projects.length"
-      color="transparent"
-      width="500"
-      class="my-10 mx-auto"
-    >
-      <v-progress-circular
-        v-if="loading"
-        :size="200"
-        width="7"
-        color="#435569"
-        indeterminate
-      ></v-progress-circular>
-      <v-btn
-        v-else
-        color="success"
-        fab
-        x-large
-        dark
-        :to="{ name: 'project-create' }"
-      >
+    <v-sheet v-if="!projects.length" color="transparent" width="500" class="my-10 mx-auto">
+      <v-progress-circular v-if="loading" :size="200" width="7" color="#435569" indeterminate></v-progress-circular>
+      <v-btn v-else color="success" fab x-large dark :to="{ name: 'project-create' }">
         <v-icon>mdi-plus-circle-outline</v-icon>
       </v-btn>
     </v-sheet>
-    <ProjectDashBoard
-      v-if="projects.length"
-      :projects="projects"
-      class="my-5"
-    />
-    <ProjectTable
-      v-if="projects.length"
-      :projects="projects"
-      @refreshPage="refreshPage"
-    />
+    <ProjectDashBoard v-if="projects.length" :projects="projects" class="my-5" />
+    <ProjectTable v-if="projects.length" :projects="projects" @refreshPage="refreshPage" />
   </div>
 </template>
 
@@ -48,12 +22,12 @@ export default {
   components: {
     TitleDateTime,
     ProjectTable,
-    ProjectDashBoard,
+    ProjectDashBoard
   },
   data() {
     return {
       projects: [],
-      loading: true,
+      loading: true
     }
   },
   methods: {
@@ -64,18 +38,22 @@ export default {
           this.loading = false
         })
         .catch((error) => {
-          console.log(error)
+          const notification = {
+            type: 'error',
+            message: `There was an error getting the projects. Details: ${error.message}`
+          }
+          this.$store.dispatch('add', notification)
           this.loading = false
         })
     },
     refreshPage() {
       this.getProjects()
-    },
+    }
   },
 
   created() {
     this.getProjects()
-  },
+  }
 }
 </script>
 

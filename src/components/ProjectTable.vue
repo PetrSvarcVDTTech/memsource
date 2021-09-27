@@ -1,56 +1,36 @@
 <template>
   <div>
+    <!-- card table wrapper -->
     <v-card>
+      <!-- table fillter and create button -->
       <v-card-title>
-        <v-text-field
-          v-model="search"
-          append-icon="mdi-magnify"
-          label="Search"
-          single-line
-          hide-details
-        ></v-text-field>
+        <v-text-field v-model="search" append-icon="mdi-magnify" label="Search" single-line hide-details></v-text-field>
         <v-spacer></v-spacer>
-        <v-btn
-          small
-          color="success"
-          :to="{ name: 'project-create' }"
-          class="mt-2"
-        >
-          <v-icon class="mr-2">mdi-plus-circle-outline</v-icon> New
-          Project</v-btn
-        >
+        <v-btn small color="success" :to="{ name: 'project-create' }" class="mt-2"> <v-icon class="mr-2">mdi-plus-circle-outline</v-icon> New Project</v-btn>
       </v-card-title>
+      <!-- data table -->
       <v-data-table :headers="headers" :items="projects" :search="search" dense>
         <template v-slot:item.dateDue="{ item }">
-          <span :class="`${dateColor(item.dateDue)}--text`">{{
-            modDate(item.dateDue)
-          }}</span>
+          <span :class="`${dateColor(item.dateDue)}--text`">{{ modDate(item.dateDue) }}</span>
         </template>
         <template v-slot:item.dateCreated="{ item }">
           {{ modDate(item.dateCreated) }}
         </template>
         <template v-slot:item.actions="{ item }">
-          <v-icon @click="editProject(item.id)" color="primary" class="mr-2"
-            >mdi-pencil-outline</v-icon
-          >
-          <v-icon @click="openDeleteDialog(item.id)" color="error" class="ml-2"
-            >mdi-trash-can-outline</v-icon
-          >
+          <v-icon @click="editProject(item.id)" color="primary" class="mr-2">mdi-pencil-outline</v-icon>
+          <v-icon @click="openDeleteDialog(item.id)" color="error" class="ml-2">mdi-trash-can-outline</v-icon>
         </template>
       </v-data-table>
     </v-card>
+    <!-- delete confirmation dialog -->
     <v-dialog v-model="dialog.isOn" persistent max-width="290">
       <v-card>
         <v-card-title class="text-h5"> Delete </v-card-title>
-        <v-card-text
-          >Are you sure you want to proceed with this action?</v-card-text
-        >
+        <v-card-text>Are you sure you want to proceed with this action?</v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn text @click="dialog.isOn = false"> Cancel </v-btn>
-          <v-btn color="error" text @click="deleteProject(dialog.projectId)">
-            Delete
-          </v-btn>
+          <v-btn color="error" text @click="deleteProject(dialog.projectId)"> Delete </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -68,11 +48,13 @@ export default {
     return {
       dialog: {
         isOn: false,
-        projectId: null,
+        projectId: null
       },
       confirmed: false,
+      //Table variables
       search: '',
       headers: [
+        //New values can be added here to the table together with header names
         { text: '#', value: 'id', filterable: false, sortable: true },
         { text: 'Name', value: 'name', filterable: true, sortable: true },
         { text: 'Status', value: 'status', filterable: true, sortable: true },
@@ -81,10 +63,10 @@ export default {
           text: 'Created',
           value: 'dateCreated',
           filterable: false,
-          sortable: false,
+          sortable: false
         },
-        { text: '', value: 'actions', sortable: false },
-      ],
+        { text: '', value: 'actions', sortable: false }
+      ]
     }
   },
   methods: {
@@ -118,11 +100,22 @@ export default {
         .then(() => {
           this.dialog.isOn = false
           this.dialog.projectId = null
+          const notification = {
+            type: 'success',
+            message: 'Project deleted succefully!'
+          }
+          this.$store.dispatch('add', notification)
           this.$emit('refreshPage')
         })
-        .catch((error) => console.log(error))
-    },
-  },
+        .catch((error) => {
+          const notification = {
+            type: 'error',
+            message: `Error: ${error.message}`
+          }
+          this.$store.dispatch('add', notification)
+        })
+    }
+  }
 }
 </script>
 

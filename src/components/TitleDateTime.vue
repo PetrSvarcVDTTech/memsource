@@ -12,9 +12,7 @@
       </div>
 
       <v-spacer></v-spacer>
-      <div
-        class="text-h4 font-weight-light text-md-right text-capitalize title"
-      >
+      <div class="text-h4 font-weight-light text-md-right text-capitalize title">
         {{ currentDay }}
 
         <span class="text-h4 font-weight-black text-md-right title">
@@ -33,19 +31,19 @@ export default {
   data: () => ({
     currentTime: null,
     currentDate: null,
-    currentDay: null,
+    currentDay: null
   }),
   methods: {
     updateTime() {
       this.currentTime = moment().format('LTS')
-    },
+    }
   },
   created() {
     this.currentTime = moment().format('LTS')
     this.currentDay = moment().format('dddd')
     this.currentDate = moment().format('LL')
     setInterval(() => this.updateTime(), 1 * 1000)
-  },
+  }
 }
 </script>
 <style scoped>

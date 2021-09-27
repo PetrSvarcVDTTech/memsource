@@ -46,13 +46,13 @@ Plugin.install = function (Vue) {
     axios: {
       get() {
         return _axios
-      },
+      }
     },
     $axios: {
       get() {
         return _axios
-      },
-    },
+      }
+    }
   })
 }
 
