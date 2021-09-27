@@ -4,8 +4,8 @@ const apiClient = axios.create({
   withCredentials: false, // This is the default
   headers: {
     Accept: 'application/json',
-    'Content-Type': 'application/json',
-  },
+    'Content-Type': 'application/json'
+  }
 })
 
 export default {
@@ -23,5 +23,5 @@ export default {
   },
   deleteProject(id) {
     return apiClient.delete('/projects/' + id)
-  },
+  }
 }

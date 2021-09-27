@@ -10,23 +10,23 @@ const routes = [
   {
     path: '/',
     name: 'project-list',
-    component: ProjectList,
+    component: ProjectList
   },
   {
     path: '/project/create',
     name: 'project-create',
-    component: ProjectCreate,
+    component: ProjectCreate
   },
   {
     path: '/project/:id',
     name: 'project-show',
     component: ProjectShow,
-    props: true,
-  },
+    props: true
+  }
 ]
 
 const router = new VueRouter({
-  routes,
+  routes
 })
 
 export default router
